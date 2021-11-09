@@ -11,20 +11,22 @@ window.addEventListener("DOMContentLoaded", function () {
         },
         methods: {
             onApiCall() {
-                
+                for (let i = 0; i < 10; i++) {
+                    axios.get(this.url).then((ajaxRensponse) => {
+                        const rispostaServer = ajaxRensponse.data;
+                        const newEmail = rispostaServer.response;
+    
+                        this.emailsList.push(newEmail);                  
+                    });
+                }
+                console.log(this.emailsList);
+    
+                console.log(this.emailsList[3]);
             },
             
         },
         mounted() {
-            for (let i = 0; i < 10; i++) {
-                axios.get(this.url).then((ajaxRensponse) => {
-                    const rispostaServer = ajaxRensponse.data;
-                    const newEmail = rispostaServer.response;
-
-                    this.emailsList.push(newEmail);                  
-                });
-            }
-            console.log(this.emailsList);
+            
         }
     });
 });
